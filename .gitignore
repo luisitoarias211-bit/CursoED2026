@@ -1,0 +1,5 @@
+# Ejecutables (Windows y Unix)
+*.exe
+*.out
+*.o
+*.vscode

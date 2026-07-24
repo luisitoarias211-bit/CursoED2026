@@ -21,3 +21,4 @@ Proyecto desarrollado por:
 
 - Luis Alberto Gonzalez Arias
 - Mery Daniela Angulo
+- Karol Nicol Silva

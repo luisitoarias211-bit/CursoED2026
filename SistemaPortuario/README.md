@@ -16,6 +16,20 @@ Diseñar e implementar un sistema que permita administrar el funcionamiento del 
 - Consultar información de pasajeros y destinos.
 - Generar estadísticas del sistema.
 
+# Conceptos aplicados
+
+- Programación estructurada.
+- Modularización.
+- Gestión dinámica de memoria.
+- Apuntadores.
+- Colas FIFO.
+- Árboles Binarios.
+- Árboles Balanceados.
+- Validación de datos.
+- Estadísticas.
+- Recorridos de árboles.
+
+
 # Autores
 Proyecto desarrollado por:
 

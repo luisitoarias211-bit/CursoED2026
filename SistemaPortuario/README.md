@@ -29,7 +29,8 @@ Diseñar e implementar un sistema que permita administrar el funcionamiento del 
 - Estadísticas.
 - Recorridos de árboles.
 
-
+# Como compilar
+gcc -Wall -Wextra -Iinclude -o terminal_buenaventura src/main.c src/destino.c src/pasajero.c src/viaje.c src/estadisticas.c
 # Autores
 Proyecto desarrollado por:
 

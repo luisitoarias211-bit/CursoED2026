@@ -1,4 +1,4 @@
-ifndef DESTINO_H
+#ifndef DESTINO_H
 #define DESTINO_H
 
 #include "pasajero.h"

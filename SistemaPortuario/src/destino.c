@@ -27,7 +27,7 @@ int colaDestinos_existeCodigo(const ColaDestinos *cola, int codigo) {
     return colaDestinos_buscarPorCodigo(cola, codigo) != NULL;
 }
 
-int colaDestinos_registrar(ColaDestinos *cola, int codigo, const char *nombre, const char *empresa) {
+int colaDestinos_registrar(ColaDestinos *cola, int codigo, const char *nombre, const char *empresa, double costo) {
     if (colaDestinos_existeCodigo(cola, codigo)) {
         return -1; /* codigo duplicado */
     }
@@ -42,6 +42,7 @@ int colaDestinos_registrar(ColaDestinos *cola, int codigo, const char *nombre, c
     nuevo->nombre[LONGITUD_NOMBRE - 1] = '\0';
     strncpy(nuevo->empresa, empresa, LONGITUD_EMPRESA - 1);
     nuevo->empresa[LONGITUD_EMPRESA - 1] = '\0';
+    nuevo->costo = costo;
     colaPasajeros_inicializar(&nuevo->colaPasajeros);
     nuevo->raizViajes = NULL;
     nuevo->siguiente = NULL;
@@ -83,7 +84,7 @@ void colaDestinos_mostrarTodos(const ColaDestinos *cola) {
     }
 }
 
-int colaDestinos_modificar(ColaDestinos *cola, int codigo, const char *nuevoNombre, const char *nuevaEmpresa) {
+int colaDestinos_modificar(ColaDestinos *cola, int codigo, const char *nuevoNombre, const char *nuevaEmpresa, double nuevoCosto) {
     Destino *destino = colaDestinos_buscarPorCodigo(cola, codigo);
     if (destino == NULL) {
         return -1; /* destino no encontrado */
@@ -95,6 +96,9 @@ int colaDestinos_modificar(ColaDestinos *cola, int codigo, const char *nuevoNomb
     if (nuevaEmpresa != NULL && nuevaEmpresa[0] != '\0') {
         strncpy(destino->empresa, nuevaEmpresa, LONGITUD_EMPRESA - 1);
         destino->empresa[LONGITUD_EMPRESA - 1] = '\0';
+    }
+    if (nuevoCosto >= 0.0) {
+        destino->costo = nuevoCosto;
     }
     return 0;
 }

@@ -22,6 +22,17 @@ static int leerEntero(const char *mensaje) {
     return valor;
 }
 
+static double leerDouble(const char *mensaje) {
+    double valor;
+    printf("%s", mensaje);
+    while (scanf("%lf", &valor) != 1) {
+        printf("Entrada invalida. Intente de nuevo: ");
+        limpiarBufferEntrada();
+    }
+    limpiarBufferEntrada();
+    return valor;
+}
+
 static void leerTexto(const char *mensaje, char *destino, int longitud) {
     printf("%s", mensaje);
     if (fgets(destino, longitud, stdin) != NULL) {
@@ -53,10 +64,11 @@ static void opcionRegistrarDestino(ColaDestinos *destinos) {
     int codigo = leerEntero("Codigo del destino: ");
     char nombre[LONGITUD_NOMBRE];
     char empresa[LONGITUD_EMPRESA];
+    double costo = leerDouble("Costo del destino: ");
     leerTexto("Nombre del destino: ", nombre, LONGITUD_NOMBRE);
     leerTexto("Empresa que lo gestiona: ", empresa, LONGITUD_EMPRESA);
 
-    int resultado = colaDestinos_registrar(destinos, codigo, nombre, empresa);
+    int resultado = colaDestinos_registrar(destinos, codigo, nombre, empresa, costo);
     if (resultado == -1) {
         printf("Error: ya existe un destino con ese codigo.\n");
     } else if (resultado == -2) {
@@ -136,7 +148,7 @@ static void opcionBuscarViaje(ColaDestinos *destinos) {
         printf("Viaje no encontrado en este destino.\n");
     } else {
         printf("Viaje encontrado -> Codigo: %d | Capacidad maxima: %d | Embarcados: %d\n",
-               encontrado->codigoViaje, encontrado->capacidadMaxima, encontrado->pasajerosEmbarcados);
+            encontrado->codigoViaje, encontrado->capacidadMaxima, encontrado->pasajerosEmbarcados);
     }
 }
 
@@ -184,7 +196,7 @@ static void opcionConsultarPasajero(ColaDestinos *destinos) {
         Pasajero *encontrado = colaPasajeros_buscarPorDocumento(&actual->colaPasajeros, documento);
         if (encontrado != NULL) {
             printf("Pasajero encontrado -> Destino: %s | Estado: %s\n",
-                   actual->nombre, estadoPasajeroTexto(encontrado->estado));
+                actual->nombre, estadoPasajeroTexto(encontrado->estado));
             return;
         }
         actual = actual->siguiente;
@@ -196,10 +208,11 @@ static void opcionModificarDestino(ColaDestinos *destinos) {
     int codigo = leerEntero("Codigo del destino a modificar: ");
     char nombre[LONGITUD_NOMBRE];
     char empresa[LONGITUD_EMPRESA];
+    double costo = leerDouble("Nuevo costo (valor negativo para no cambiar): ");
     leerTexto("Nuevo nombre (enter para no cambiar): ", nombre, LONGITUD_NOMBRE);
     leerTexto("Nueva empresa (enter para no cambiar): ", empresa, LONGITUD_EMPRESA);
 
-    int resultado = colaDestinos_modificar(destinos, codigo, nombre, empresa);
+    int resultado = colaDestinos_modificar(destinos, codigo, nombre, empresa, costo);
     if (resultado == -1) {
         printf("Error: destino no encontrado.\n");
     } else {

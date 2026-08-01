@@ -2,20 +2,23 @@
 #define PASAJERO_H
 
 /* ---------- Tipos de documento permitidos ---------- */
-typedef enum {
+typedef enum
+{
     CEDULA_CIUDADANIA = 1,
     PASAPORTE = 2,
     TARJETA_IDENTIDAD = 3
 } TipoDocumento;
 
 /* ---------- Estado del pasajero ---------- */
-typedef enum {
+typedef enum
+{
     EN_ESPERA = 0,
     EMBARCADO = 1
 } EstadoPasajero;
 
 /* ---------- Nodo de la cola FIFO de pasajeros ---------- */
-typedef struct Pasajero {
+typedef struct Pasajero
+{
     int numeroDocumento;
     TipoDocumento tipoDocumento;
     EstadoPasajero estado;
@@ -23,7 +26,8 @@ typedef struct Pasajero {
 } Pasajero;
 
 /* ---------- Cola FIFO de pasajeros (una por destino) ---------- */
-typedef struct {
+typedef struct
+{
     Pasajero *frente;
     Pasajero *final;
     int cantidad;
